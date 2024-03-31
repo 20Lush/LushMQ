@@ -42,6 +42,9 @@ target_compile_features(${PROJECT_NAME}
         cxx_std_20
 )
 
+# We are going to be statically linking my packaged up ZeroMQ artifact. There are some LGPL concerns regarding if thats even
+# ok, however considering LushMQ is opensource itself, it shouldn't be a problem. One should be totally able to run an edited
+# version of LMQ with my distribution of ZMQ, or an edited version of ZMQ with my version of LMQ (provided they build from source)
 set(ZeroMQ_DIR ${DEPS_PATH}/zmq/lib/cmake/ZeroMQ)
 find_package(ZeroMQ REQUIRED)
 
