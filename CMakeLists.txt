@@ -4,9 +4,9 @@ cmake_minimum_required(VERSION 3.22)
 set(PROJECT_VERSION 1.0.0)
 
 # Initialize our project regarding the whole repo, and give it its version.
-project(LIBRARY_REPOSITORY_NAME
+project(LushMQRepo
     VERSION ${PROJECT_VERSION}
-    DESCRIPTION "LIBRARY Repository"
+    DESCRIPTION "lushMQ Repository"
 )
 message(STATUS "Repository name: " ${PROJECT_NAME})
 

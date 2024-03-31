@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.22)
 
 # Lets initialize the project for our actual library
-project(LIBRARY_NAME
+project(LushMQ
     VERSION ${PROJECT_VERSION}
-    DESCRIPTION "LIBRARY Project"
+    DESCRIPTION "LushMQ Project"
 )
 message(STATUS "Project name: " ${PROJECT_NAME})
 
@@ -25,6 +25,7 @@ add_library( ${PROJECT_NAME}
 
 # There might be some includes we want at build-time here
 include_directories("${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}")
+include_directories(${DEPENDENCY_PATH})
 
 # The installed directory is going to have its own include directory.
 # In the unlikely scenario this library is used in another project,
@@ -41,6 +42,9 @@ target_compile_features(${PROJECT_NAME}
         cxx_std_20
 )
 
+set(ZeroMQ_DIR ${DEPS_PATH}/zmq/lib/cmake/ZeroMQ)
+find_package(ZeroMQ REQUIRED)
+
 # Set some target properties of the installed binaries, liked if they have position independent code
 set_target_properties(${PROJECT_NAME}
     PROPERTIES
@@ -51,7 +55,7 @@ set_target_properties(${PROJECT_NAME}
 # Link the libraries we want, like OpenCV or the cuda toolkit
 target_link_libraries(${PROJECT_NAME}
     PUBLIC
-        # any dependency library we are linking...
+        libzmq-static
 )
 
 # Send to boilerplate!

@@ -1,0 +1,2 @@
+set(CMAKE_BOILERPLATE_PATH ${CMAKE_SOURCE_DIR}/.CMake-Boilerplate)
+set(DEPS_PATH ${CMAKE_SOURCE_DIR}/.Dependencies)

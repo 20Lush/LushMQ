@@ -1,6 +1,8 @@
 
 #include "main.hpp"
 
+#include <zmq.hpp>
+
 // Make sure to change the namespace LIBRARY to something more specific
 namespace lush::LIBRARY {
 

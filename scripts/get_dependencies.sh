@@ -5,6 +5,7 @@
 # Do .../releases/latest/download/<file>.tar.xz to always get the latest artifact without have to manually update the string here
 declare -a dependency_links=(
     "https://github.com/20Lush/DevOps/releases/latest/download/clang-format.tar.xz"
+    "https://github.com/20Lush/libzmq/releases/latest/download/zmq.tar.xz"
 )
 
 # Make the dependencies directory if it doesn't exist...
