@@ -1,6 +1,7 @@
 #pragma once
 #include <functional>
 
+#include "Endpoint.hpp"
 #include "zmq.hpp"
 
 namespace lush::lushmq {
@@ -8,7 +9,7 @@ namespace lush::lushmq {
 	/** @brief LMQ's subscriber object, extending & moderately automating ZMQ's socket_t type
 	 *
 	 */
-	class LushSubscriber : public zmq::socket_t {
+	class LushSubscriber {
 
 	public:
 		/** @brief LushSubscriber's constructor overload you might want to use if there aren't any contexts in the
@@ -52,11 +53,17 @@ namespace lush::lushmq {
 	protected:
 		/** @brief LushSubscriber's protected destructor. This is probably the end of the polymorphic line, so we don't
 		 * need to expose the deletion.
-		 *
 		 */
 		~LushSubscriber();
 
+		// Our subscriber's ZMQ context interfaced with a shared_ptr
 		std::shared_ptr<zmq::context_t> m_context;
+
+		// Set in constructors, not const. Please don't change me after im set. :(
+		zmq::socket_t m_socket;
+
+		// Set in constructors, but can also be re-set at great cost.
+		endpoint m_endpoint;
 	};
 
 }  // namespace lush::lushmq
