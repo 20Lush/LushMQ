@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.22)
 
 # Project version number. Good metadata to have, but ONLY INCREMENT WHEN THERE IS SOMETHING BEING RELEASED!
-set(PROJECT_VERSION 1.0.0)
+set(PROJECT_VERSION 0.1.1)
 
 # Initialize our project regarding the whole repo, and give it its version.
 project(LushMQRepo
