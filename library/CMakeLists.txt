@@ -67,7 +67,8 @@ set_target_properties(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME}
     PUBLIC
         stdfc++
-        libzmq-static
+        libzmq
+        cppzmq
 )
 
 # Send to boilerplate!

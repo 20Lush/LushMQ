@@ -18,24 +18,24 @@ namespace lush::lushmq {
 
             /** @brief LushSubscriber constructor overload you might want to use if there is already a ZMQ context_t floating around
              *  @note Useful if you know that you might be using this to communicate between threads, or otherwise don't want the context instantiation overhead
-             *  @param zmq_context reference to pre-existing zmq::context_t 
+             *  @param zmq_context ptr to pre-existing zmq::context_t 
             */
-            LushSubscriber(const zmq::context_t& zmq_context);
+            LushSubscriber(const std::shared_ptr<zmq::context_t> zmq_context);
 
             /** @brief LushSubscriber's copy constructor.
              *
             */
-            LushSubscriber(LushSubscriber const& derived);
+            LushSubscriber(LushSubscriber const& derived_from);
 
             /** @brief LushSubscriber's assignment operator overload.
              *
             */
             LushSubscriber& operator=(LushSubscriber const& rhs);
 
-            /** @brief Gets the current context of the Subscriber
+            /** @brief Gets a pointer to the context being used by the Subscriber. Pointer by necessity of the fact that the context could have been dynamically allocated
              *  @note This should be safe to call at any point in the lifetime of the Subscriber, as you can't instantiate one without a context.
             */
-            zmq::context_t GetContext();
+            std::shared_ptr<zmq::context_t> GetContext() const;
         
         protected:
             /** @brief LushSubscriber's protected destructor. This is probably the end of the polymorphic line, so we don't need to expose the deletion.
