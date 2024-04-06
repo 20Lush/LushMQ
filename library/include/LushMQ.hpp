@@ -1,7 +1,6 @@
 #pragma once
 #include <string>
 
-// Make sure to change the namespace LIBRARY to something more specific
 namespace lush::lushmq {
 
 	/**	@brief Versioning information from CMake build indicating major version number

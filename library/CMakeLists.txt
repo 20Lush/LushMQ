@@ -10,11 +10,13 @@ message(STATUS "Project name: " ${PROJECT_NAME})
 # Define what source files we actually are going to compile
 set(SOURCE_FILES
     src/LushMQ.cpp
+    src/Subscriber.cpp
 )
 
 # Define what header files are going to be exposed(only put interfaces!)
 set(PUBLIC_INCLUDE_FILES
     include/LushMQ.hpp
+    include/Subscriber.hpp
 )
 
 # Do a CMake add_library to mark it for build. change STATIC to SHARED or whatever when needed.
