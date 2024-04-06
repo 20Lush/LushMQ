@@ -1,8 +1,7 @@
 #include "LushMQ.hpp"
+#include "version.hpp"
 
 #include <zmq.hpp>
-
-#include "version.hpp"
 
 namespace lush::lushmq {
 
