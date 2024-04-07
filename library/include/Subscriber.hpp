@@ -48,14 +48,9 @@ namespace lush::lushmq {
 		 * context could have been dynamically allocated
 		 *  @note This should be safe to call at any point in the lifetime of the Subscriber, as you can't instantiate
 		 * one without a context.
+		 *  @returns shared pointer to a `zmq::context_t` inherent to the object. Feel free to use it!
 		 */
 		std::shared_ptr<zmq::context_t> GetContext() const;
-
-	protected:
-		/** @brief LushSubscriber's protected destructor. This is probably the end of the polymorphic line, so we don't
-		 * need to expose the deletion.
-		 */
-		~LushSubscriber();
 
 		/** @brief The Subscriber's states. Each has specific logic executed in order, cycling back to IDLE.
 		 *  @note INIT and STOP are entry and exit states that shall only be found once each per lifetime of a
@@ -100,7 +95,19 @@ namespace lush::lushmq {
 			 */
 			STOP
 
-		} m_state;
+		};
+
+		/** @brief Gets the current state of the object.
+		 *  @note This should be safe to call at any point in the lifetime of the Subscriber, as it is a FSM at heart
+		 *  @returns 
+		 */
+		State GetState() const;
+
+	protected:
+		/** @brief LushSubscriber's protected destructor. This is probably the end of the polymorphic line, so we don't
+		 * need to expose the deletion.
+		 */
+		~LushSubscriber();
 
 		// Our subscriber's ZMQ context interfaced with a shared_ptr
 		std::shared_ptr<zmq::context_t> m_context;
@@ -110,6 +117,9 @@ namespace lush::lushmq {
 
 		// Set in constructors, but can also be re-set at great cost.
 		endpoint m_endpoint;
+
+		// Internal-use state value of the object.
+		State m_state;
 	};
 
 }  // namespace lush::lushmq

@@ -70,6 +70,10 @@ namespace lush::lushmq {
 		return *this;
 	}
 
+	LushSubscriber::State LushSubscriber::GetState() const {
+		return m_state;
+	}
+
 	LushSubscriber::~LushSubscriber() {
 	}
 
