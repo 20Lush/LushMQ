@@ -125,7 +125,7 @@ namespace lush::lushmq {
 		zmq::socket_t m_socket;
 
 		// Set in constructors, but can also be re-set at great cost.
-		endpoint m_endpoint;
+		Endpoint m_endpoint;
 
 		// Internal-use state value of the object.
 		State m_state;

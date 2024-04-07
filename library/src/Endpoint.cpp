@@ -5,14 +5,14 @@
 
 namespace lush::lushmq {
 
-	endpoint& endpoint::operator=(endpoint const& rhs) {
+	Endpoint& Endpoint::operator=(Endpoint const& rhs) {
 		this->protocol = rhs.protocol;
 		this->address = rhs.address;
 		this->port = rhs.port;
 		return *this;
 	}
 
-	std::string endpoint::AsString() {
+	std::string Endpoint::AsString() {
 
 		if (protocol == zmq_protocols::inproc || protocol == zmq_protocols::ipc) {
 			port.clear();

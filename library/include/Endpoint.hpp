@@ -47,13 +47,13 @@ namespace lush::lushmq {
 
 	}  // namespace lmq_ports
 
-	/** @brief LMQ interface for ZMQ compliant endpoints for use in socket_t bind operations.
+	/** @brief LMQ interface for ZMQ compliant Endpoints for use in socket_t bind operations.
 	 * Will silently remove port if the protocol is "inproc" or "ipc"
 	 *  @note http://api.zeromq.org/4-2:zmq-bind
 	 */
-	struct endpoint {
+	struct Endpoint {
 
-		/** @brief LMQ interface for ZMQ compliant endpoints for use in socket_t bind operations.
+		/** @brief LMQ interface for ZMQ compliant Endpoints for use in socket_t bind operations.
 		 *  @note Endpoint.hpp supplies a namespace of zmq's values. i.e `zmq_protocols::tcp`
 		 */
 		std::string protocol;
@@ -71,13 +71,13 @@ namespace lush::lushmq {
 		/** @brief Default constructor
 		 *  @attention protocol=`zmq_protocols::tcp`, address=`"*"`, port=`lmq_ports::normal`
 		 */
-		endpoint() : protocol(zmq_protocols::tcp), address("*"), port(lmq_ports::normal) {
+		Endpoint() : protocol(zmq_protocols::tcp), address("*"), port(lmq_ports::normal) {
 		}
 
 		/** @brief Copy constructor
 		 *  @attention Copys all protocol/address/port information with no reinitialization
 		 */
-		endpoint(endpoint const& original)
+		Endpoint(Endpoint const& original)
 		    : protocol(original.protocol),
 		      address(original.address),
 		      port(original.port) {
@@ -86,7 +86,7 @@ namespace lush::lushmq {
 		/** @brief Full parameter constructor
 		 * 	@note No defaults, must specify all. Consider using the `zmq_protocols` and `lmq_ports` namespaces!
 		 */
-		endpoint(std::string _protocol, std::string _address, std::string _port)
+		Endpoint(std::string _protocol, std::string _address, std::string _port)
 		    : protocol(_protocol),
 		      address(_address),
 		      port(_port) {
@@ -94,11 +94,11 @@ namespace lush::lushmq {
 
 		/** @brief Assignment operator. Just copys info from right to left.
 		 */
-		endpoint& operator=(endpoint const& rhs);
+		Endpoint& operator=(Endpoint const& rhs);
 
-		/** @brief Get the endpoint formatted as a string.
+		/** @brief Get the Endpoint formatted as a string.
 		 *  @attention Clears `port` if the protocol is `inproc` or `ipc`
-		 * 	@returns endpoint information as a full string. i.e. `tcp://localhost:5556`
+		 * 	@returns Endpoint information as a full string. i.e. `tcp://localhost:5556`
 		 */
 		std::string AsString();
 	};
