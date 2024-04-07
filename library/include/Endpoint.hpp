@@ -24,6 +24,10 @@ namespace lush::lushmq {
 		 *  @note http://api.zeromq.org/4-2:zmq_pgm
 		 */
 		constexpr std::string_view pgm = "pgm";
+
+		/** @brief reliable multicast transport using PGM
+		 *  @note http://api.zeromq.org/4-2:zmq_pgm
+		 */
 		constexpr std::string_view epgm = "epgm";
 
 		/** @brief virtual machine communications interface (VMCI)
@@ -60,7 +64,7 @@ namespace lush::lushmq {
 		std::string address;
 
 		/** @brief Port number (in string for)
-		 *  @note Defaults to "5556" a.k.a lmq_ports::normal in most cases
+		 *  @note Defaults to "5556" a.k.a `lmq_ports::normal` in most cases
 		 */
 		std::string port;
 

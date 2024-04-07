@@ -16,7 +16,6 @@ namespace lush::lushmq {
 
 		// Bind the socket to the endpoint we created
 		m_socket.bind(m_endpoint.AsString());
-
 	}
 
 	LushSubscriber::LushSubscriber(const std::shared_ptr<zmq::context_t> zmq_context) {
@@ -32,7 +31,6 @@ namespace lush::lushmq {
 
 		// Bind the socket to the endpoint we created
 		m_socket.bind(m_endpoint.AsString());
-
 	}
 
 	std::shared_ptr<zmq::context_t> LushSubscriber::GetContext() const {
@@ -55,7 +53,6 @@ namespace lush::lushmq {
 
 		// Bind the socket to the endpoint we created
 		m_socket.bind(m_endpoint.AsString());
-		
 	}
 
 	LushSubscriber& LushSubscriber::operator=(LushSubscriber const& rhs) {
