@@ -6,8 +6,8 @@
 
 namespace lush::lushmq {
 
-	/** @brief LMQ's subscriber object, extending & moderately automating ZMQ's socket_t type
-	 *
+	/** @brief LMQ's subscriber object, for use in a pubsub pattern. Automates some of ZMQ's logic on instantiation.
+	 *	@note Extends nothing, has no virtual overrides. Anything extending this class aught to add its own methods but abide the same construction scheme.
 	 */
 	class LushSubscriber {
 
