@@ -7,12 +7,12 @@
 namespace lush::lushmq {
 
 	/** @brief LMQ's subscriber object, for use in a pubsub pattern. Automates some of ZMQ's logic on instantiation.
-	 *	@note Extends nothing, has no virtual overrides. Anything extending this class aught to add its own methods but abide the same construction scheme.
+	 *	@note Extends nothing, has no virtual overrides. Anything extending this class aught to add its own methods but
+	 *abide the same construction scheme.
 	 */
 	class LushSubscriber {
 
 	public:
-
 		/** @brief LushSubscriber's constructor overload you might want to use if there aren't any contexts in the
 		 * program yet
 		 *  @attention INHERENTLY EXPENSIVE OPERATION. Its easy, but bad practice to make a bunch of contexts and then
@@ -58,46 +58,48 @@ namespace lush::lushmq {
 		~LushSubscriber();
 
 		/** @brief The Subscriber's states. Each has specific logic executed in order, cycling back to IDLE.
-		 *  @note INIT and STOP are entry and exit states that shall only be found once each per lifetime of a subscriber
-		*/
-		enum State {
+		 *  @note INIT and STOP are entry and exit states that shall only be found once each per lifetime of a
+		 * subscriber
+		 */
+		enum State
+		{
 
 			/** @brief Initialization state, for when things in this object are getting set up.
 			 *  @returns transitions to `IDLE` on successful initialization
 			 *  @note Object only in this state once in its lifetime.
-			*/
+			 */
 			INIT,
 
 			/** @brief Idle state, for when the object isn't prompted to do work.
 			 *  @returns when prompted to, will transition to `READ`
 			 *  @note Resting state. Does not buffer data it might be seeing.
-			*/
+			 */
 			IDLE,
 
 			/** @brief Reading state, for when the object is currently reading data coming from its subscriptions
 			 *  @returns when read process is complete, transitions to `ACK`
-			 *  @note Any errors from reading will be carried forward to the `ACK` state 
-			*/
+			 *  @note Any errors from reading will be carried forward to the `ACK` state
+			 */
 			READ,
-			
+
 			/** @brief Acknowledge state, for when the object notifies something or somebody that it has read data
 			 *  @returns when acknowledge process is complete, transitions to `OUT`
 			 *  @note Classifies and details errors from the read state, carries that foward to `OUT`
-			*/
+			 */
 			ACK,
 
 			/** @brief Output state, for when the state machine can finally release its acquired data to the caller
 			 *  @returns when output process is complete, transitions back to `IDLE` to await more work
 			 *  @note Outputs data as well as any errors that have been accrued through the object's work cycle.
-			*/
+			 */
 			OUT,
 
 			/** @brief Stop state, for when the object is tearing down.
 			 *  @returns Does not transition out, object will die in this state
 			 *  @note Object only in this state once in its lifetime.
-			*/
+			 */
 			STOP
-			
+
 		} m_state;
 
 		// Our subscriber's ZMQ context interfaced with a shared_ptr
@@ -108,7 +110,6 @@ namespace lush::lushmq {
 
 		// Set in constructors, but can also be re-set at great cost.
 		endpoint m_endpoint;
-
 	};
 
 }  // namespace lush::lushmq
