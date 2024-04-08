@@ -47,9 +47,23 @@ namespace lush::lushmq {
 
 	}  // namespace lmq_ports
 
+	namespace lmq_addresses {
+
+		/** @brief A wildcardd address used for servers to send multicasts to a particular port, usually on a local net
+		 */
+		constexpr std::string_view wildcard = "*";
+
+		/** @brief A `localhost` address commonly used for clients to read multicasts from a given port.
+		 */
+		constexpr std::string_view localhost = "localhost";
+
+		// TODO: Should add any more common addresses that might be needed. i.e. a common hardware specific address...
+
+	} // namespace lmq_addresses
+
 	/** @brief LMQ interface for ZMQ compliant Endpoints for use in socket_t bind operations.
 	 * Will silently remove port if the protocol is "inproc" or "ipc"
-	 *  @note http://api.zeromq.org/4-2:zmq-bind
+	 *  @note http://api.zeromq.org/4-2:zmq-connect
 	 */
 	struct Endpoint {
 
@@ -69,9 +83,9 @@ namespace lush::lushmq {
 		std::string port;
 
 		/** @brief Default constructor
-		 *  @attention protocol=`zmq_protocols::tcp`, address=`"*"`, port=`lmq_ports::normal`
+		 *  @attention protocol=`zmq_protocols::tcp`, address=`lmq_addresses`, port=`lmq_ports::normal`
 		 */
-		Endpoint() : protocol(zmq_protocols::tcp), address("*"), port(lmq_ports::normal) {
+		Endpoint() : protocol(zmq_protocols::tcp), address(lmq_addresses::wildcard), port(lmq_ports::normal) {
 		}
 
 		/** @brief Copy constructor

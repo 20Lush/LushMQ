@@ -11,11 +11,12 @@ namespace lush::lushmq {
 		// Instantiate the socket we'll be using to transact some data with the shared context
 		m_socket = zmq::socket_t(*m_context, zmq::socket_type::sub);
 
-		// Create a default endpoint. Configure later if you want to :)
-		m_endpoint = endpoint();
+		// Create a default Endpoint. Configure to use localhost
+		m_endpoint = Endpoint();
+		m_endpoint.address = lmq_addresses::localhost;
 
-		// Bind the socket to the endpoint we created
-		m_socket.bind(m_endpoint.AsString());
+		// connect the socket to the Endpoint we created
+		m_socket.connect(m_endpoint.AsString());
 	}
 
 	LushSubscriber::LushSubscriber(const std::shared_ptr<zmq::context_t> zmq_context) {
@@ -26,11 +27,12 @@ namespace lush::lushmq {
 		// Instantiate the socket we'll be using to transact some data with the shared context
 		m_socket = zmq::socket_t(*m_context, zmq::socket_type::sub);
 
-		// Create a default endpoint. Configure later if you want to :)
-		m_endpoint = endpoint();
+		// Create a default Endpoint. Configure to use localhost
+		m_endpoint = Endpoint();
+		m_endpoint.address = lmq_addresses::localhost;
 
-		// Bind the socket to the endpoint we created
-		m_socket.bind(m_endpoint.AsString());
+		// Connect the socket to the Endpoint we created
+		m_socket.connect(m_endpoint.AsString());
 	}
 
 	std::shared_ptr<zmq::context_t> LushSubscriber::GetContext() const {
@@ -48,11 +50,11 @@ namespace lush::lushmq {
 		// Instantiate the socket we'll be using to transact some data with the shared context
 		m_socket = zmq::socket_t(*m_context, zmq::socket_type::sub);
 
-		// Copy over endpoint information from the origin
+		// Copy over Endpoint information from the origin
 		m_endpoint = derived_from.m_endpoint;
 
-		// Bind the socket to the endpoint we created
-		m_socket.bind(m_endpoint.AsString());
+		// Connect the socket to the Endpoint we created
+		m_socket.connect(m_endpoint.AsString());
 	}
 
 	LushSubscriber& LushSubscriber::operator=(LushSubscriber const& rhs) {
@@ -63,7 +65,7 @@ namespace lush::lushmq {
 		// Copy the socket information from the right hand side
 		this->m_socket = zmq::socket_t(*this->m_context, zmq::socket_type::sub);
 
-		// Copt the endpoint information from the right hand side
+		// Copt the Endpoint information from the right hand side
 		this->m_endpoint = rhs.m_endpoint;
 
 		// Send it. Calls the copy constructor(I THINK!!!!) so the socket should be taken care of there.
