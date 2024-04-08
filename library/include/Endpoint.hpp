@@ -13,7 +13,7 @@ namespace lush::lushmq {
 		/** @brief local inter-process communication transport
 		 *  @note http://api.zeromq.org/4-2:zmq_ipc
 		 */
-		constexpr std::string_view ipc = "icp";
+		constexpr std::string_view ipc = "ipc";
 
 		/** @brief local in-process (inter-thread) communication transport
 		 *  @note http://api.zeromq.org/4-2:zmq_inproc
